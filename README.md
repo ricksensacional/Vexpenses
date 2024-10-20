@@ -59,15 +59,15 @@ Este código Terraform automatiza a criação de uma infraestrutura básica na A
 --------------------------------------------------------------------------------------
 Melhorias aplicadas no código main.tf: 
 
-Utilizei uma chave RSA de 4096 bits que oferece uma segurança criptográfica mais robusta em comparação com uma chave de 2048 bits.
+- Utilizei uma chave RSA de 4096 bits que oferece uma segurança criptográfica mais robusta em comparação com uma chave de 2048 bits.
 
-Restringi o acesso SSH a um endereço IP específico para reduzir a superfície de ataque, aumentando a segurança. O primeiro código é muito mais vulnerável, pois permite acesso SSH globalmente, expondo a instância a potenciais ataques.
+- Restringi o acesso SSH a um endereço IP específico para reduzir a superfície de ataque, aumentando a segurança. O primeiro código é muito mais vulnerável, pois permite acesso SSH globalmente, expondo a instância a potenciais ataques.
 
-A instalação e configuração do Nginx foi feita utilizando o 'user_data', tonando assim a instância mais funcional, pois você está preparando o ambiente para servir aplicações web, enquanto o primeiro código não faz essa configuração adicional.
+- A instalação e configuração do Nginx foi feita utilizando o 'user_data', tonando assim a instância mais funcional, pois você está preparando o ambiente para servir aplicações web, enquanto o primeiro código não faz essa configuração adicional.
 
-Implementei uma política IAM  que adiciona uma camada de segurança, garantindo que a instância EC2 tenha permissões adequadas para acessar serviços da AWS. Sem a política IAM a instância fica sem controle de permissões, o que pode levar a riscos de segurança e problemas de acesso desnecessário a outros serviços.
+- Implementei uma política IAM  que adiciona uma camada de segurança, garantindo que a instância EC2 tenha permissões adequadas para acessar serviços da AWS. Sem a política IAM a instância fica sem controle de permissões, o que pode levar a riscos de segurança e problemas de acesso desnecessário a outros serviços.
 
-Por fim, a última implementação feita foi adicionar um Bucket S3 com criptrografia KMS. Adicionar criptografia KMS aos dados armazenados no Amazon S3 é super importante para garantir a segurança e a confidencialidade das informações. Isso ajuda a proteger dados sensíveis contra acessos não autorizados e a atender requisitos de conformidade com regulamentações como GDPR e HIPAA. Por isso, excolhi adicionar o s3 juntammente com criptografia KMS para a proteção de dados sensíveis.
+- Por fim, a última implementação feita foi adicionar um Bucket S3 com criptrografia KMS. Adicionar criptografia KMS aos dados armazenados no Amazon S3 é super importante para garantir a segurança e a confidencialidade das informações. Isso ajuda a proteger dados sensíveis contra acessos não autorizados e a atender requisitos de conformidade com regulamentações como GDPR e HIPAA. Por isso, excolhi adicionar o s3 juntammente com criptografia KMS para a proteção de dados sensíveis.
 
 ------------------------------------------------------------------------------------------
 
