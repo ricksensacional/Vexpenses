@@ -3,15 +3,15 @@ provider "aws" {
 }
 
 variable "projeto" {
-  description = "Nome do projeto"
+  description = "Estagio"
   type        = string
   default     = "VExpenses"
 }
 
 variable "candidato" {
-  description = "Nome do candidato"
+  description = "Riquelme Carlod dos Santos"
   type        = string
-  default     = "SeuNome"
+  default     = "Riquelme"
 }
 
 resource "aws_kms_key" "s3_kms_key" {
