@@ -57,6 +57,68 @@ Implementei uma política IAM  que adiciona uma camada de segurança, garantindo
 Por fim, a última implementação feita foi adicionar um Bucket S3 com criptrografia KMS. Adicionar criptografia KMS aos dados armazenados no Amazon S3 é super importante para garantir a segurança e a confidencialidade das informações. Isso ajuda a proteger dados sensíveis contra acessos não autorizados e a atender requisitos de conformidade com regulamentações como GDPR e HIPAA. Por isso, excolhi adicionar o s3 juntammente com criptografia KMS para a proteção de dados sensíveis.
 
 
+Documentação Completa para Reproduzir a Infraestrutura AWS com Terraform:
+
+- Pré-requisitos
+
+Antes de começar, eu preciso ter os seguintes itens configurados:
+
+Conta AWS: Preciso ter uma conta da AWS ativa.
+
+AWS CLI: Vou instalar e configurar a AWS Command Line Interface (CLI) com minhas credenciais.
+
+Terraform: Vou instalar a versão mais recente do Terraform em minha máquina local. Posso baixar o Terraform aqui.
+
+Editor de Texto: Usarei um editor de texto ou IDE ( Visual Studio Code ) para editar os arquivos Terraform.
+
+- Passo a Passo
+1. Configuração do Ambiente:
+Crio um diretório para o projeto,
+Crio um arquivo de configuração Terraform,
+Crio um arquivo chamado main.tf,
+
+2. Personalização das Variáveis:
+Abro o arquivo main.tf e localizo as variáveis projeto e candidato. Posso personalizá-las conforme necessário:
+   
+variable "projeto" {
+  default = "NomeDoMeuProjeto"
+}
+
+variable "candidato" {
+  default = "MeuNome"
+}
+
+
+3. Inicialização do Terraform:
+No terminal, dentro do diretório do projeto, executo o seguinte comando para inicializar o Terraform:
+
+'terraform init'
+
+4. Planejamento da Infraestrutura
+Executo o comando abaixo para visualizar o que o Terraform irá criar:
+
+'terraform plan'
+
+Revisarei a saída para garantir que tudo esteja conforme o esperado.
+
+5. Aplicação da Configuração
+Para criar a infraestrutura, executo o seguinte comando:
+
+'terraform apply'
+
+O Terraform irá solicitar minha confirmação. Digito yes para prosseguir.
+
+6. Acesso à Instância EC2
+Após a aplicação bem-sucedida, o Terraform fornecerá a chave privada para acessar a instância EC2 e o endereço IP público.
+
+
+7. Limpeza da Infraestrutura
+Se eu quiser remover toda a infraestrutura criada, executo:
+
+'terraform destroy'
+
+O Terraform solicitará minha confirmação. Digito yes para prosseguir.
+
 
 
 
