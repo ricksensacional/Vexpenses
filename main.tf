@@ -9,7 +9,7 @@ variable "projeto" {
 }
 
 variable "candidato" {
-  description = "Riquelme Carlod dos Santos"
+  description = "Riquelme Carlos dos Santos"
   type        = string
   default     = "Riquelme"
 }
