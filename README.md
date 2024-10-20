@@ -36,9 +36,13 @@ data "aws_ami" "debian12": Busca a imagem mais recente do Debian 12, filtrando p
 Instância EC2
 
 resource "aws_instance" "debian_ec2": Cria uma instância EC2 usando a AMI Debian 12, tipo t2.micro, associada à sub-rede e ao par de chaves criado. A instância tem um volume raiz de 20 GB e um script de inicialização que atualiza e faz upgrade do sistema.
+
 4. Saídas
 output "private_key": Exibe a chave privada gerada para acesso à instância EC2, marcada como sensível.
 output "ec2_public_ip": Exibe o endereço IP público da instância EC2 criada.
+
+
+
 Resumo:
 Este código Terraform automatiza a criação de uma infraestrutura básica na AWS, incluindo uma VPC, sub-rede, gateway de internet, tabela de rotas, grupo de segurança, e uma instância EC2 com Debian 12. As variáveis permitem personalizar o nome do projeto e do candidato, enquanto as saídas fornecem informações essenciais para acessar a instância.
 
