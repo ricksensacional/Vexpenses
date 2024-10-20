@@ -63,6 +63,8 @@ Melhorias aplicadas no código main.tf:
 
 - Restringi o acesso SSH a um endereço IP específico para reduzir a superfície de ataque, aumentando a segurança. O primeiro código é muito mais vulnerável, pois permite acesso SSH globalmente, expondo a instância a potenciais ataques.
 
+- Limitei o tráfego de saída apenas para protocolo HTTPS ( porta 433 ), tornando a saída mais segura, juntamente com a entrada que aceita apenas um IP específico. 
+
 - A instalação e configuração do Nginx foi feita utilizando o 'user_data', tonando assim a instância mais funcional, pois você está preparando o ambiente para servir aplicações web, enquanto o primeiro código não faz essa configuração adicional.
 
 - Implementei uma política IAM  que adiciona uma camada de segurança, garantindo que a instância EC2 tenha permissões adequadas para acessar serviços da AWS. Sem a política IAM a instância fica sem controle de permissões, o que pode levar a riscos de segurança e problemas de acesso desnecessário a outros serviços.
