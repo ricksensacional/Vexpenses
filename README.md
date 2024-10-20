@@ -74,7 +74,7 @@ Melhorias aplicadas no código main.tf:
 
 -Resultados Esperados com a modificação:
 
- Este código Terraform cria uma infraestrutura AWS composta por uma VPC com uma subnet e Internet Gateway, uma instância EC2 rodando Debian 12 com Nginx instalado automaticamente, um bucket S3 criptografado com KMS, e políticas de segurança que permitem acesso restrito ao S3 e tráfego seguro via HTTPS. A instância EC2 terá acesso ao bucket S3 conforme as permissões IAM configuradas, e você poderá acessá-la via SSH usando a chave privada gerada. O bucket S3 estará protegido por uma política que permite acesso apenas por solicitações HTTPS e pela instância EC2.
+ Este código Terraform cria uma infraestrutura AWS composta por uma VPC com uma subnet e Internet Gateway, uma instância EC2 rodando Debian 12 com Nginx instalado automaticamente, um bucket S3 criptografado com KMS, e políticas de segurança que permitem acesso restrito ao S3 e tráfego seguro via HTTPS. A instância EC2 terá acesso ao bucket S3 conforme as permissões IAM configuradas e, poderemos acessá-la via SSH usando a chave privada gerada. O bucket S3 estará protegido por uma política que permite acesso apenas por solicitações HTTPS e pela instância EC2.
 
 ------------------------------------------------------------------------------------------
 
