@@ -135,10 +135,6 @@ resource "aws_route_table" "main_route_table" {
 resource "aws_route_table_association" "main_association" {
   subnet_id      = aws_subnet.main_subnet.id
   route_table_id = aws_route_table.main_route_table.id
-
-  tags = {
-    Name = "${var.projeto}-${var.candidato}-route_table_association"
-  }
 }
 
 resource "aws_security_group" "main_sg" {
@@ -151,17 +147,18 @@ resource "aws_security_group" "main_sg" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = ["192.168.1.5/22"]
+    cidr_blocks      = ["192.168.0.0/22"] # exemplo de IP específico
     ipv6_cidr_blocks = ["::/0"]
   }
 
   egress {
-    description      = "Allow all outbound traffic"
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+  description      = "Allow HTTPS outbound traffic"
+  from_port        = 443
+  to_port          = 443
+  protocol         = "tcp"
+  cidr_blocks      = ["0.0.0.0/0"]
+  ipv6_cidr_blocks = ["::/0"]
+
   }
 
   tags = {
