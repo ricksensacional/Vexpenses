@@ -28,7 +28,6 @@ resource "aws_kms_alias" "s3_kms_alias" {
   target_key_id = aws_kms_key.s3_kms_key.id
 }
 
-# Bucket S3 com criptografia KMS
 resource "aws_s3_bucket" "main_s3_bucket" {
   bucket = "${var.projeto}-${var.candidato}-bucket"
 
@@ -46,13 +45,23 @@ resource "aws_s3_bucket" "main_s3_bucket" {
   }
 }
 
-# Permissão para a chave KMS no bucket S3
 resource "aws_s3_bucket_policy" "main_s3_bucket_policy" {
   bucket = aws_s3_bucket.main_s3_bucket.id
 
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
+      {
+        Effect    = "Allow",
+        Principal = {
+          AWS = aws_iam_role.ec2_role.arn
+        },
+        Action    = "s3:*",
+        Resource  = [
+          "${aws_s3_bucket.main_s3_bucket.arn}",
+          "${aws_s3_bucket.main_s3_bucket.arn}/*"
+        ]
+      },
       {
         Sid       = "AllowSSLRequestsOnly",
         Effect    = "Deny",
@@ -137,7 +146,6 @@ resource "aws_security_group" "main_sg" {
   description = "Permitir SSH de IPs específicos e todo o tráfego de saída"
   vpc_id      = aws_vpc.main_vpc.id
 
-  # Regras de entrada
   ingress {
     description      = "Allow SSH from specific IP"
     from_port        = 22
@@ -147,7 +155,6 @@ resource "aws_security_group" "main_sg" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  # Regras de saída
   egress {
     description      = "Allow all outbound traffic"
     from_port        = 0
@@ -161,7 +168,7 @@ resource "aws_security_group" "main_sg" {
     Name = "${var.projeto}-${var.candidato}-sg"
   }
 }
-# Criar uma política de IAM para a instância EC2 
+
 resource "aws_iam_role" "ec2_role" {
   name = "${var.projeto}-${var.candidato}-ec2-role"
 
@@ -190,10 +197,16 @@ resource "aws_iam_policy" "ec2_policy" {
       {
         Effect = "Allow"
         Action = [
-          "s3:ListBucket",
+          "s3:ListBucket"
+        ]
+        Resource = aws_s3_bucket.main_s3_bucket.arn
+      },
+      {
+        Effect = "Allow"
+        Action = [
           "s3:GetObject"
         ]
-        Resource = "*"
+        Resource = "${aws_s3_bucket.main_s3_bucket.arn}/*"
       },
     ]
   })
@@ -221,12 +234,12 @@ data "aws_ami" "debian12" {
 }
 
 resource "aws_instance" "debian_ec2" {
-  ami             = data.aws_ami.debian12.id
-  instance_type   = "t2.micro"
-  subnet_id       = aws_subnet.main_subnet.id
-  key_name        = aws_key_pair.ec2_key_pair.key_name
-  security_groups = [aws_security_group.main_sg.name]
-   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
+  ami                    = data.aws_ami.debian12.id
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.main_subnet.id
+  key_name               = aws_key_pair.ec2_key_pair.key_name
+  security_groups        = [aws_security_group.main_sg.name]
+  iam_instance_profile    = aws_iam_instance_profile.ec2_profile.name
   associate_public_ip_address = true
 
   root_block_device {
@@ -260,7 +273,8 @@ output "ec2_public_ip" {
   description = "Endereço IP público da instância EC2"
   value       = aws_instance.debian_ec2.public_ip
 } 
+
 resource "aws_iam_instance_profile" "ec2_profile" {
   name = "${var.projeto}-${var.candidato}-ec2-profile"
   role = aws_iam_role.ec2_role.name
-  }
+}
