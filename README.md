@@ -56,7 +56,7 @@ Resumo:
 Este código Terraform automatiza a criação de uma infraestrutura básica na AWS, incluindo uma VPC, sub-rede, gateway de internet, tabela de rotas, grupo de segurança, e uma instância EC2 com Debian 12. As variáveis permitem personalizar o nome do projeto e do candidato, enquanto as saídas fornecem informações essenciais para acessar a instância.
 
 
-
+--------------------------------------------------------------------------------------
 Melhorias aplicadas no código main.tf: 
 
 Utilizei uma chave RSA de 4096 bits que oferece uma segurança criptográfica mais robusta em comparação com uma chave de 2048 bits.
@@ -68,6 +68,8 @@ A instalação e configuração do Nginx foi feita utilizando o 'user_data', ton
 Implementei uma política IAM  que adiciona uma camada de segurança, garantindo que a instância EC2 tenha permissões adequadas para acessar serviços da AWS. Sem a política IAM a instância fica sem controle de permissões, o que pode levar a riscos de segurança e problemas de acesso desnecessário a outros serviços.
 
 Por fim, a última implementação feita foi adicionar um Bucket S3 com criptrografia KMS. Adicionar criptografia KMS aos dados armazenados no Amazon S3 é super importante para garantir a segurança e a confidencialidade das informações. Isso ajuda a proteger dados sensíveis contra acessos não autorizados e a atender requisitos de conformidade com regulamentações como GDPR e HIPAA. Por isso, excolhi adicionar o s3 juntammente com criptografia KMS para a proteção de dados sensíveis.
+
+------------------------------------------------------------------------------------------
 
 
 Documentação Completa para Reproduzir a Infraestrutura AWS com Terraform:
