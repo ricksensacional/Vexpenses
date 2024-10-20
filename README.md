@@ -71,6 +71,11 @@ Melhorias aplicadas no código main.tf:
 
 - Por fim, a última implementação feita foi adicionar um Bucket S3 com criptrografia KMS. Adicionar criptografia KMS aos dados armazenados no Amazon S3 é super importante para garantir a segurança e a confidencialidade das informações. Isso ajuda a proteger dados sensíveis contra acessos não autorizados e a atender requisitos de conformidade com regulamentações como GDPR e HIPAA. Por isso, excolhi adicionar o s3 juntammente com criptografia KMS para a proteção de dados sensíveis.
 
+
+-Resultados Esperados com a modificação:
+
+ Este código Terraform cria uma infraestrutura AWS composta por uma VPC com uma subnet e Internet Gateway, uma instância EC2 rodando Debian 12 com Nginx instalado automaticamente, um bucket S3 criptografado com KMS, e políticas de segurança que permitem acesso restrito ao S3 e tráfego seguro via HTTPS. A instância EC2 terá acesso ao bucket S3 conforme as permissões IAM configuradas, e você poderá acessá-la via SSH usando a chave privada gerada. O bucket S3 estará protegido por uma política que permite acesso apenas por solicitações HTTPS e pela instância EC2.
+
 ------------------------------------------------------------------------------------------
 
 
